@@ -1,17 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import { createRoot } from 'react-dom/client'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import '../src/styles/main.css'
+import { Provider } from 'react-redux'
+import store from './app/Store'
+import Header from './layout/Header'
+import Homepage from './Pages/Home'
+import Login from './Pages/Login'
+import Profile from './Pages/Profile'
+import Footer from './layout/Footer'
+import PageNotFound from './Pages/PageNotFound'
+import ProtectedRoute from './utils/ProtectedRoute/ProtectedRoute'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const container = document.getElementById('root')
+const root = createRoot(container)
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    <React.StrictMode>
+        <Router>
+            <Provider store={store}>
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Homepage />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProtectedRoute>
+                                <Profile />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route path="*" element={<PageNotFound />} />
+                </Routes>
+                <Footer />
+            </Provider>
+        </Router>
+    </React.StrictMode>
+)
