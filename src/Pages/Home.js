@@ -15,7 +15,7 @@ const Home = () => {
                         key={index}
                         src={feature.src}
                         title={feature.title}
-                        desc={feature.desc}
+                        description={feature.description}
                     />
                 )
             })}

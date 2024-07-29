@@ -6,6 +6,7 @@ const initialState = {
     email: '',
     firstName: '',
     lastName: '',
+    userName: '',
     id: '',
     createdAt: '',
     updatedAt: '',
@@ -45,6 +46,7 @@ export const userSlice = createSlice({
             state.email = ''
             state.firstName = ''
             state.lastName = ''
+            state.userName = ''
             state.id = ''
             state.createdAt = ''
             state.updatedAt = ''
@@ -56,6 +58,7 @@ export const userSlice = createSlice({
                 state.email = payload.email
                 state.firstName = payload.firstName
                 state.lastName = payload.lastName
+                state.userName = payload.userName
                 state.id = payload.id
                 state.createdAt = payload.createdAt
                 state.updatedAt = payload.updatedAt
@@ -63,6 +66,7 @@ export const userSlice = createSlice({
             .addCase(updateUserData.fulfilled, (state, { payload }) => {
                 state.firstName = payload.firstName
                 state.lastName = payload.lastName
+                state.userName = payload.userName
                 state.updatedAt = payload.updatedAt
             })
     },

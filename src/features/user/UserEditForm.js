@@ -1,75 +1,94 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-
-import { getUserData, updateUserData } from './userSlice'
-import { getAuthToken } from '../auth/authSlice'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserData, updateUserData } from './userSlice';
+import { getAuthToken } from '../auth/authSlice';
 
 function UserEditForm({ setEditToggle }) {
-    const dispatch = useDispatch()
-    const token = useSelector(getAuthToken)
-    const user = useSelector(getUserData)
+    const dispatch = useDispatch();
+    const token = useSelector(getAuthToken);
+    const user = useSelector(getUserData);
     const [userNames, setUserNames] = useState({
-        firstName: '',
-        lastName: '',
-    })
+        firstName: user.firstName || '',
+        lastName: user.lastName || '',
+        userName: user.userName || '', 
+    });
 
-    const canSave = Boolean(userNames.firstName) && Boolean(userNames.lastName)
+    const canSave = Boolean(userNames.firstName) && Boolean(userNames.lastName) && Boolean(userNames.userName);
 
     const handleCancel = () => {
-        setEditToggle(false)
-    }
+        setEditToggle(false);
+    };
 
     const handleChange = (event) => {
         setUserNames({
             ...userNames,
             [event.target.name]: event.target.value,
-        })
-    }
+        });
+    };
 
-    const handleEdit = async (token, userNames) => {
-        const data = { token, userNames }
+    const handleEdit = async () => {
+        const data = { token, userNames: {userName: userNames.userName} };
         if (canSave) {
-            dispatch(updateUserData(data))
-            setEditToggle(false)
+            dispatch(updateUserData(data));
+            setEditToggle(false);
         }
-    }
+    };
 
     return (
-        <div>
+        <div className="container">
             <div className="edit-wrapper">
-                <input
-                    type="text"
-                    name="firstName"
-                    placeholder={user.firstName}
-                    value={userNames.firstName}
-                    autoFocus
-                    onChange={(e) => handleChange(e)}
-                />
-                <input
-                    type="text"
-                    name="lastName"
-                    placeholder={user.lastName}
-                    value={userNames.lastName}
-                    onChange={(e) => handleChange(e)}
-                />
+                <div className="input-group">
+                    <label for="userName">User Name:</label>
+                    <input
+                        type="text"
+                        id="userName"
+                        name="userName"
+                        placeholder={user.userName || "User Name"}
+                        value={userNames.userName}
+                        autoFocus
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="input-group">
+                    <label for="firstName">First Name:</label>
+                    <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        placeholder={user.firstName || "First Name"}
+                        value={userNames.firstName}
+                        disabled
+                    />
+                </div>
+                <div className="input-group">
+                    <label for="lastName">Last Name:</label>
+                    <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        placeholder={user.lastName || "Last Name"}
+                        value={userNames.lastName}
+                        disabled
+                    />
+                </div>
             </div>
-            <div className="edit-wrapper">
+            <div className="button-wrapper">
                 <button
                     className="edit-content-button"
                     disabled={!canSave}
-                    onClick={() => handleEdit(token, userNames)}
+                    onClick={handleEdit}
                 >
                     Save
                 </button>
                 <button
                     className="edit-content-button"
-                    onClick={() => handleCancel(token, userNames)}
+                    onClick={handleCancel}
                 >
                     Cancel
                 </button>
             </div>
         </div>
-    )
+    );
 }
 
-export default UserEditForm
+export default UserEditForm;

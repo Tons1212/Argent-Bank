@@ -1,19 +1,23 @@
-import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import Logo from '../assets/argentBankLogo.webp'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAuthConnected, logout } from '../features/auth/authSlice'
-import { emptyUserData, getUserData } from '../features/user/userSlice'
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import Logo from '../assets/argentBankLogo.webp';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuthConnected, logout } from '../features/auth/authSlice';
+import { emptyUserData, getUserData } from '../features/user/userSlice';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 function Header() {
-    const dispatch = useDispatch()
-    const firstName = useSelector(getUserData).firstName
-    const connected = useSelector(getAuthConnected)
+    const dispatch = useDispatch();
+    const userData = useSelector(getUserData);
+    const connected = useSelector(getAuthConnected);
 
     const handleLogOut = () => {
-        dispatch(logout())
-        dispatch(emptyUserData())
-    }
+        dispatch(logout());
+        dispatch(emptyUserData());
+    };
+
+    const displayName = userData.userName || userData.firstName;
 
     return (
         <nav className="main-nav">
@@ -28,15 +32,15 @@ function Header() {
             <div>
                 {!connected && (
                     <NavLink className="main-nav-item" to="/login">
-                        <i className="fa fa-user-circle" aria-hidden="true"></i>
+                        <i className="fas fa-user-circle" aria-hidden="true"></i>
                         Sign In
                     </NavLink>
                 )}
                 {connected && (
                     <>
                         <NavLink className="main-nav-item" to="/profile">
-                            <i className="fa fa-user-circle"></i>
-                            {firstName}
+                            <i className="fas fa-user-circle"></i>
+                            {displayName}
                         </NavLink>
                         <NavLink
                             className="main-nav-item"
@@ -44,7 +48,7 @@ function Header() {
                             onClick={handleLogOut}
                         >
                             <i
-                                className="fa fa-sign-out"
+                                className="fas fa-sign-out"
                                 aria-hidden="true"
                             ></i>
                             Sign out
@@ -53,7 +57,7 @@ function Header() {
                 )}
             </div>
         </nav>
-    )
+    );
 }
 
-export default Header
+export default Header;
