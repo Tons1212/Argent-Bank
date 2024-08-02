@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
 
 const initialState = {
     credentials: '',
@@ -15,10 +14,21 @@ export const getUserToken = createAsyncThunk(
     'auth/getUserToken',
     async (credentials, { rejectWithValue }) => {
         try {
-            const response = await axios.post(BASE_URL, credentials)
-            return response.data
+            const response = await fetch(BASE_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(credentials),
+            });
+            const data = await response.json();
+            return data
         } catch (error) {
-            return rejectWithValue(error.code)
+            if (error.message === 'bad request') {
+                return rejectWithValue('BAD_REQUEST');
+            } else {
+                return rejectWithValue('ERROR_NETWORK')
+            }
         }
     }
 )
