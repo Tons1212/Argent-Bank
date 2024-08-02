@@ -190,6 +190,10 @@ html {
   .input-remember label {
     margin-left: 0.25rem;
   }
+
+  .errorMessage {
+    color: red;
+  }
   
   .input-wrapper {
     display: flex;

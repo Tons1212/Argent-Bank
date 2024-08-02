@@ -21,16 +21,18 @@ export const getUserToken = createAsyncThunk(
                 },
                 body: JSON.stringify(credentials),
             });
+            if (!response.ok) {
+                if (response.status === 400) {
+                    return rejectWithValue('ERR_BAD_REQUEST');
+                }
+                return rejectWithValue('ERR_NETWORK');
+            }
             const data = await response.json();
             return data
         } catch (error) {
-            if (error.message === 'bad request') {
-                return rejectWithValue('BAD_REQUEST');
-            } else {
-                return rejectWithValue('ERROR_NETWORK')
+                return rejectWithValue('ERR_NETWORK')
             }
         }
-    }
 )
 
 export const authSlice = createSlice({
@@ -66,7 +68,7 @@ export const authSlice = createSlice({
                 if (action.payload === 'ERR_NETWORK') {
                     state.error = 'Network Error'
                 } else if (action.payload === 'ERR_BAD_REQUEST') {
-                    state.error = ' Invalid Username or Password'
+                    state.error = 'Invalid Username or Password'
                 }
             })
     },
