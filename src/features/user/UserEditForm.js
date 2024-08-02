@@ -51,7 +51,7 @@ function UserEditForm({ setEditToggle }) {
                 </div>
                 <div className="input-group">
                     <label for="firstName">First Name:</label>
-                    <input
+                    <input className='disabledFields'
                         type="text"
                         id="firstName"
                         name="firstName"
@@ -62,7 +62,7 @@ function UserEditForm({ setEditToggle }) {
                 </div>
                 <div className="input-group">
                     <label for="lastName">Last Name:</label>
-                    <input
+                    <input className='disabledFields'
                         type="text"
                         id="lastName"
                         name="lastName"

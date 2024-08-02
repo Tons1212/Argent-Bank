@@ -293,6 +293,10 @@ html {
     text-align: right;      
 }
 
+.disabledFields {
+  background: grey;
+}
+
   .edit-button, .edit-content-button {
     border-color: #00bc77;
     background-color: #00bc77;
