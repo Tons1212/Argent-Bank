@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+// Hooks rédux, dispatcher ou selectionner des états depuis le store
 import { useDispatch, useSelector } from 'react-redux'
+// Naviguer vers une autre page
 import { useNavigate } from 'react-router-dom'
+// Sélecteurs et actions liés à l'authentification importés depuis le slice
 import {
     changeUserCredentials,
     getAuthError,
