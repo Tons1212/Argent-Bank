@@ -38,7 +38,7 @@ function UserEditForm({ setEditToggle }) {
         <div className="container">
             <div className="edit-wrapper">
                 <div className="input-group">
-                    <label for="userName">User Name:</label>
+                    <label htmlFor="userName">User Name:</label>
                     <input
                         type="text"
                         id="userName"
@@ -50,7 +50,7 @@ function UserEditForm({ setEditToggle }) {
                     />
                 </div>
                 <div className="input-group">
-                    <label for="firstName">First Name:</label>
+                    <label htmlFor="firstName">First Name:</label>
                     <input className='disabledFields'
                         type="text"
                         id="firstName"
@@ -61,7 +61,7 @@ function UserEditForm({ setEditToggle }) {
                     />
                 </div>
                 <div className="input-group">
-                    <label for="lastName">Last Name:</label>
+                    <label htmlFor="lastName">Last Name:</label>
                     <input className='disabledFields'
                         type="text"
                         id="lastName"

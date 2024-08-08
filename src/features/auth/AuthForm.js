@@ -20,13 +20,16 @@ function AuthForm() {
     })
     const [rememberMe, setRememberMe] = useState(true)
 
+// Selecteurs Redux
     const authError = useSelector(getAuthError)
     const authStatus = useSelector(getAuthStatus)
 
+// Inverse l'état de Remember me si la case est cochée
     const handleRememberMe = () => {
         setRememberMe(!rememberMe)
     }
-
+// variables pour affichage conditionnel en cas d'echec ou de chargement 
+// de l'authentification
     let content
     if (authStatus === 'failed') {
         content = <span className="errorMessage">{authError}</span>

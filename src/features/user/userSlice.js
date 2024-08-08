@@ -7,8 +7,6 @@ const initialState = {
     lastName: '',
     userName: '',
     id: '',
-    createdAt: '',
-    updatedAt: '',
 }
 
 export const fetchUserData = createAsyncThunk(
@@ -52,8 +50,6 @@ export const userSlice = createSlice({
             state.lastName = ''
             state.userName = ''
             state.id = ''
-            state.createdAt = ''
-            state.updatedAt = ''
         },
     },
     extraReducers: (builder) => {
@@ -64,14 +60,11 @@ export const userSlice = createSlice({
                 state.lastName = payload.lastName
                 state.userName = payload.userName
                 state.id = payload.id
-                state.createdAt = payload.createdAt
-                state.updatedAt = payload.updatedAt
             })
             .addCase(updateUserData.fulfilled, (state, { payload }) => {
                 state.firstName = payload.firstName
                 state.lastName = payload.lastName
                 state.userName = payload.userName
-                state.updatedAt = payload.updatedAt
             })
     },
 })
