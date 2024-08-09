@@ -64,7 +64,6 @@ export const authSlice = createSlice({
             .addCase(getUserToken.rejected, (state, action) => {
                 state.status = 'failed'
                 state.connected = false
-                console.log(action.payload)
                 if (action.payload === 'ERR_NETWORK') {
                     state.error = 'Network Error'
                 } else if (action.payload === 'ERR_BAD_REQUEST') {

@@ -63,7 +63,7 @@ function AuthForm() {
     return (
         <form onSubmit={(e) => handleSubmit(e)}>
             <div className="input-wrapper">
-                <label for="username">Username</label>
+                <label htmlFor="username">Username</label>
                 <input
                     type="text"
                     id="username"
@@ -74,7 +74,7 @@ function AuthForm() {
                 />
             </div>
             <div className="input-wrapper">
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
                 <input
                     type="password"
                     id="password"
